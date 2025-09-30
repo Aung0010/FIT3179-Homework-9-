@@ -16,19 +16,19 @@
   },
     {
       "data": {
-        "url": "data/geoBoundaries-MYS-ADM1_simplified.json",
+        "url": "geoBoundaries-MYS-ADM1_simplified.json",
         "format": { "type": "topojson", "feature": "geoBoundaries-MYS-ADM1_simplified" }
       },
       "mark": {"type": "geoshape", "fill": "white", "stroke": "white"}
     },
     {
-      "data": { "url": "data/tourist_states_visited.csv" },
+      "data": { "url": "tourist_states_visited.csv" },
       "transform": [
         {
           "lookup": "state",
           "from": {
             "data": {
-              "url": "data/geoBoundaries-MYS-ADM1_simplified.json",
+              "url": "geoBoundaries-MYS-ADM1_simplified.json",
               "format": { "type": "topojson", "feature": "geoBoundaries-MYS-ADM1_simplified" }
             },
             "key": "properties.shapeName",
@@ -52,3 +52,4 @@
     }
   ]
 }
+
