@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 500,
+  "title": "Singaporean Tourists Visiting Malaysian States (%) – 2023",
+  "projection": {"type": "mercator","center": [109.5, 3.5], "scale": 2300},
+  "layer": [
+  {
+    "data": {"graticule": {"step": [5,5]}},
+    "mark": {
+      "type": "geoshape",
+      "filled": false,
+      "stroke": "#cbd5e1",
+      "strokeWidth": 0.6
+    }
+  },
+    {
+      "data": {
+        "url": "data/geoBoundaries-MYS-ADM1_simplified.json",
+        "format": { "type": "topojson", "feature": "geoBoundaries-MYS-ADM1_simplified" }
+      },
+      "mark": {"type": "geoshape", "fill": "white", "stroke": "white"}
+    },
+    {
+      "data": { "url": "data/tourist_states_visited.csv" },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/geoBoundaries-MYS-ADM1_simplified.json",
+              "format": { "type": "topojson", "feature": "geoBoundaries-MYS-ADM1_simplified" }
+            },
+            "key": "properties.shapeName",
+            "fields": ["type", "geometry"]
+          }
+        }
+      ],
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {
+          "field": "percent",
+          "type": "quantitative",
+          "scale": {"scheme": "redblue"},
+          "title": "% Visitors"
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "percent", "type": "quantitative", "title": "% Visitors"}
+        ]
+      }
+    }
+  ]
+}
